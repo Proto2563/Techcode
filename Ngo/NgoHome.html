@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NGO Home</title>
+</head>
+<body>
+
+<h1 id="welcomeMessage">Welcome!</h1>
+
+<!-- Add buttons or links for various donor functions -->
+<ul>
+  <li><a href="NgoChooseDonation.html" id="NgoChooseDonationLink">Choose a Donation</a></li>
+  <li><a href="NgoUpdateDelivery.html" id="NgoUpdateDeliveryLink">Update Delivery Status</a></li>
+  <li><a href="UpdateProfile.html">Update Profile</a></li>
+  <li><a href="ContactSupport.html">Contact Support</a></li>
+  <li><a href="Login.html">Log out</a></li>
+</ul>
+
+<!-- Optional: Display donor ID or fetch more info -->
+<script>
+// Get NID from URL (e.g. DonorHome.html?NID=101)
+const urlParams = new URLSearchParams(window.location.search);
+const NID = urlParams.get('NID');
+
+if (NID) {
+  // Show it on page
+  document.getElementById("welcomeMessage").innerText = `Welcome, NGO #${NID}`; 
+}
+  // Update the donation link dynamically
+  if (NID) {
+    document.getElementById("NgoChooseDonationLink").href = `NgoChooseDonation.html?NID=${NID}`;
+    document.getElementById("NgoUpdateDeliveryLink").href = `NgoUpdateDelivery.html?NID=${NID}`;
+    document.getElementById("DonorUpdateDeliveryLink").href = `DonorUpdateDelivery.html?NID=${NID}`;
+  }
+</script>
+
+</body>
+</html>

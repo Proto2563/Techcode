@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Donations to Deliver</title>
+</head>
+<body>
+
+<h2>Your Past Donations</h2>
+<table border="1" id="donationTable">
+  <thead>
+    <tr>
+      <th>Item ID</th>
+      <th>Item Name</th>
+      <th>Category</th>
+      <th>Drop Location</th>
+      <th>Image</th>
+      <th>Delivery Status</th>
+      <th>Delivery Code</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+  window.onload = function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const DID = urlParams.get('DID');
+
+    if (!DID) {
+      alert("Donor ID missing");
+      return;
+    }
+
+    fetch(`http://localhost:3000/DonorViewDeliveryStatus?DID=${DID}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          const tbody = document.querySelector("#donationTable tbody"); //Finds tbody part of table where results will be inserted
+//console.log("Data from backend:", data.donations);
+          data.donations.forEach(item => {
+            //console.log(item);  // ADD THIS TOO
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+              <td>${item.IID}</td>
+              <td>${item.IName}</td>
+              <td>${item.ICategory}</td>
+              <td>${item.IDropLoc}</td>
+              <td><img src="../Photo/${item.IPhoto}" width="100"/></td>
+              <td>${item.DelStatus}</td>
+              <td>
+                ${item.DelStatus === "Not Delivered"
+                  ? `<input type="text" placeholder="Enter Code" id="code-${item.IID}" />`
+                  : ""}
+              </td>
+              <td>
+                ${item.DelStatus === "Not Delivered"
+                  ? `<button onclick="submitDelivery(${item.IID}, this)">Submit</button>`
+                  : ""}
+              </td>
+
+            `;
+            //<img src="../Photo/${item.IPhoto}" width="100"/>
+
+            tbody.appendChild(row); //Adds row to end of tbody
+          });
+        } else {
+          alert("Failed to fetch donations");
+        }
+      })
+
+      .catch(err => {
+        console.error("Fetch error:", err);
+      });
+  };
+
+  function submitDelivery(IID, btn) {
+  const input = document.getElementById(`code-${IID}`);
+  const code = input.value.trim();
+
+  if (!code) {
+    alert("Please enter the delivery code.");
+    return;
+  }
+
+  fetch(`http://localhost:3000/DonorConfirmDelivery?IID=${IID}&code=${code}`, {
+    method: "POST"
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        // Mark as Delivered
+        const row = btn.parentElement.parentElement;
+        row.children[5].innerText = "Delivered";
+        row.children[6].innerHTML = "";
+        row.children[7].innerHTML = "";
+      } else {
+        alert("Invalid code or delivery failed.");
+      }
+    })
+    .catch(err => {
+      console.error("Delivery confirmation failed:", err);
+    });
+}
+</script>
+
+</body>
+</html>
+

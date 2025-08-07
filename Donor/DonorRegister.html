@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+</head>
+<body>
+
+<form id="loginForm">
+  <input type="text" id="email" name="email" placeholder="E-mail" required><br>
+  <input type="text" id="FirstName" name="FirstName" placeholder="text" required><br>
+  <input type="text" id="LastName" name="LastName" placeholder="text" required><br>
+  <input type="password" id="pass" name="pass" placeholder="Password" required><br>
+
+  <input type="checkbox" id="togglePass" onclick="togglePassword();">
+  <label for="togglePass">View password</label><br>
+
+  <button type="submit" id="b">Submit</button>
+</form>
+
+<a href="DonorLogin.html">Donor Login</a>
+
+<!-- Password toggle script -->
+<script>
+function togglePassword() {
+  const passwordField = document.getElementById("pass");
+  passwordField.type = (passwordField.type === "password") ? "text" : "password";
+}
+</script>
+
+<!-- Check if u can actually connect to the server before checking credentials -->
+<script>
+fetch('http://localhost:3000')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    document.getElementById("output").innerText = JSON.stringify(data, null, 2);
+  })
+  .catch(error => {
+    console.error("Error connecting to Node.js backend:", error);
+  });
+</script>
+
+<!--Check if the credentials match in Server.js-->
+<script>
+document.querySelector("form").addEventListener("submit", function (e) {
+  e.preventDefault();  // Stop form from submitting the normal way
+
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("pass").value;
+
+  fetch("http://localhost:3000/DonorRegister", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, pass })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("Response from server:", data);
+    if (data.success) {
+      // ✅ Manual redirect with DID
+      window.location.href = `DonorHome.html?DID=${data.DID}`;
+    } else {
+      alert("Invalid login");
+    }
+  })
+  .catch(err => {
+    console.error("Fetch error:", err);
+  });
+});
+</script>
+
+<div id="output" style="white-space: pre-wrap; margin-top: 10px;"></div>
+
+</body>
+</html>
