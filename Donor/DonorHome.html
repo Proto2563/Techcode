@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Donor Home</title>
+</head>
+<body>
+
+<h1 id="welcomeMessage">Welcome!</h1>
+
+<!-- Add buttons or links for various donor functions -->
+<ul>
+  <li><a href="DonorMakeDonation.html" id="makeDonationLink">Make a Donation</a></li>
+  <li><a href="DonorViewDonation.html" id="DonorViewDonationLink">View Past Donations</a></li>
+  <li><a href="DonorUpdateDelivery.html" id="DonorUpdateDeliveryLink">Update Delivery Status</a></li>
+</ul>
+
+<!-- Optional: Display donor ID or fetch more info -->
+<script>
+// Get DID from URL (e.g. DonorHome.html?DID=101)
+const urlParams = new URLSearchParams(window.location.search);
+const DID = urlParams.get('DID');
+
+if (DID) {
+  // Show it on page
+  document.getElementById("welcomeMessage").innerText = `Welcome, Donor #${DID}`; 
+}
+  // Update the donation link dynamically
+  if (DID) {
+    document.getElementById("makeDonationLink").href = `DonorMakeDonation.html?DID=${DID}`;
+    document.getElementById("DonorViewDonationLink").href = `DonorViewDonation.html?DID=${DID}`;
+    document.getElementById("DonorUpdateDeliveryLink").href = `DonorUpdateDelivery.html?DID=${DID}`;
+  }
+</script>
+
+</body>
+</html>
