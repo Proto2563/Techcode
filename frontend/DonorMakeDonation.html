@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Donation - Charity Flow</title>
+    <style>
+        /* Global Styles - Consistent with other pages */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: #e74c3c;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        /* Main Content */
+        .donation-form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 160px);
+            padding: 40px 0;
+        }
+        
+        .donation-form {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .donation-form h2 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 28px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        /* File Upload Styling */
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-upload-btn {
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .file-upload-btn:hover {
+            border-color: #3498db;
+            background-color: #f8f9fa;
+        }
+        
+        .file-upload-input {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            outline: none;
+            opacity: 0;
+            cursor: pointer;
+            left: 0;
+            top: 0;
+        }
+        
+        .file-upload-text {
+            margin-top: 10px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .file-upload-preview {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        /* Submit Button */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 600px) {
+            .donation-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Charity<span>Flow</span></div>
+            <div class="user-info">
+                <span>Welcome, John Doe</span>
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Profile">
+            </div>
+        </div>
+    </header>
+    
+    <div class="donation-form-container">
+        <div class="container">
+            <form class="donation-form" id="donationForm">
+                <h2>Make a Donation</h2>
+                
+                <div class="form-group">
+                    <label for="itemName">Item Name</label>
+                    <input type="text" id="itemName" name="itemName" placeholder="Enter the name of the item you're donating" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="itemCategory">Item Category</label>
+                    <select id="itemCategory" name="itemCategory" required>
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="food">Food</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="furniture">Furniture</option>
+                        <option value="books">Books</option>
+                        <option value="toys">Toys</option>
+                        <option value="medical">Medical Supplies</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="donationCenter">Donation Center</label>
+                    <select id="donationCenter" name="donationCenter" required>
+                        <option value="" disabled selected>Select a donation center</option>
+                        <option value="center1">Hope Foundation - Downtown</option>
+                        <option value="center2">Green Earth - North District</option>
+                        <option value="center3">Bright Future - East Side</option>
+                        <option value="center4">Helping Hands - West End</option>
+                        <option value="center5">Community Care - South Quarter</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Item Image (Optional)</label>
+                    <div class="file-upload">
+                        <div class="file-upload-btn">
+                            <i class="fas fa-cloud-upload-alt" style="font-size: 24px; color: #7f8c8d;"></i>
+                            <p>Click to upload an image of your item</p>
+                            <span class="file-upload-text">JPEG or PNG, max 5MB</span>
+                            <img id="imagePreview" class="file-upload-preview" alt="Image Preview">
+                        </div>
+                        <input type="file" id="itemImage" name="itemImage" class="file-upload-input" accept="image/*">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Submit Donation</button>
+            </form>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Charity Flow. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Image preview functionality
+        document.getElementById('itemImage').addEventListener('change', function(e) {
+            const preview = document.getElementById('imagePreview');
+            const file = e.target.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // Form submission handling (frontend only)
+        document.getElementById('donationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Donation submitted successfully! (This is a frontend demo)');
+            this.reset();
+            document.getElementById('imagePreview').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

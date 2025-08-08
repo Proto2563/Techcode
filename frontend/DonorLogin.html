@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Login - Charity Flow</title>
+    <style>
+        /* Global Styles - Consistent with index page */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: #e74c3c;
+        }
+        
+        /* Login Section */
+        .login-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 160px);
+            padding: 40px 0;
+        }
+        
+        .login-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .login-card h2 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 28px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .login-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .login-links a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .login-links a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        .login-links div {
+            margin-top: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 600px) {
+            .login-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Charity<span>Flow</span></div>
+        </div>
+    </header>
+    
+    <section class="login-section">
+        <div class="container">
+            <div class="login-card">
+                <h2>Donor Login</h2>
+                <form action="/donor-login" method="POST">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    
+                    <div class="login-links">
+                        <a href="forgot-password.html">Forgot Password?</a>
+                        <div>
+                            Don't have an account? <a href="donorRegister.html">Register here</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Charity Flow. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
